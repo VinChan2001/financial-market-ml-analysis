@@ -117,18 +117,21 @@ pip install -r requirements.txt
 ### Run Complete Analysis
 
 ```bash
-# Run full financial ML pipeline
+# Run full financial ML pipeline (main script)
 python financial_ml_pipeline.py
 
 # Run real-time prediction demo
 python financial_ml_pipeline.py --demo
+
+# Alternative: Run original ML pipeline
+python main.py
 ```
 
 ### Explore with Jupyter
 
 ```bash
 # Start Jupyter notebook
-jupyter notebook notebooks/financial_analysis_demo.ipynb
+jupyter notebook notebooks/ml_project_demo.ipynb
 ```
 
 ## Sample Outputs
@@ -170,53 +173,55 @@ LOW RISK OPTIONS:
 project-paper-pitch/
 ├── src/
 │   ├── data/
-│   │   └── financial_data_loader.py    # Real-time data extraction
+│   │   ├── data_loader.py              # Generic dataset loader
+│   │   └── financial_data_loader.py    # Real-time financial data extraction
 │   ├── models/
-│   │   └── financial_models.py         # ML prediction models
+│   │   ├── model_trainer.py            # Generic ML model trainer
+│   │   ├── financial_models.py         # Financial ML prediction models
+│   │   └── model_deployment.py         # Model deployment simulation
+│   ├── features/
+│   │   └── preprocessing.py            # Feature engineering pipeline
 │   ├── analysis/
 │   │   └── economic_analyzer.py        # Economic analysis engine
 │   └── visualization/
+│       ├── visualizer.py               # Generic visualizations
 │       └── financial_visualizer.py     # Financial charts & dashboards
-├── data/raw/                           # Downloaded financial data
-├── models/                             # Saved ML models
+├── data/
+│   └── raw/
+│       └── financial_dataset.csv       # Downloaded financial data (3.8MB)
+├── models/
+│   ├── best_price_prediction_model.pkl # Trained price prediction model
+│   └── best_direction_prediction_model.pkl # Trained direction classifier
 ├── reports/figures/                    # Generated visualizations
-├── notebooks/                          # Jupyter analysis notebooks
-├── financial_ml_pipeline.py            # Main execution script
-├── requirements.txt                    # Python dependencies
-└── README.md                          # Project documentation
+├── notebooks/
+│   └── ml_project_demo.ipynb          # Jupyter analysis notebook
+├── financial_ml_pipeline.py           # Main financial analysis script
+├── main.py                            # Alternative ML pipeline
+├── requirements.txt                   # Python dependencies
+└── *.png                             # Visualization images (10 files)
 ```
 
-## Visualizations Generated
+## Generated Visualizations
 
-### 1. Stock Price Trends
-- Multi-company price comparison
-- Moving averages overlay
-- Volume analysis
+All visualization files are saved both in the main directory and `reports/figures/`:
 
-### 2. Technical Indicators Dashboard
-- RSI, MACD, Bollinger Bands
-- Volume patterns
-- Price momentum
+### Financial Analysis Charts
+- `financial_health_scores.png` - Company health ratings and distribution
+- `sector_performance.png` - Sector returns and risk-return profiles
+- `risk_assessment.png` - Risk analysis dashboard with multiple metrics
+- `correlation_matrix.png` - Stock correlation heatmap
 
-### 3. Financial Health Scores
-- Company comparison bar charts
-- Rating distribution pie charts
-- Health score components
+### Technical Analysis
+- `technical_AAPL.png` - Apple stock technical indicators (RSI, MACD, Volume)
+- `technical_GOOGL.png` - Google stock technical analysis
+- `technical_MSFT.png` - Microsoft stock technical analysis
 
-### 4. Sector Analysis
-- Performance comparison
-- Risk-return scatter plots
-- Sector allocation
+### Machine Learning Results
+- `price_predictions.png` - Price prediction vs actual scatter plot and residuals
+- `direction_predictions.png` - Direction classification confusion matrix
 
-### 5. Risk Assessment
-- Risk score rankings
-- Beta vs volatility plots
-- Risk level distribution
-
-### 6. Model Performance
-- Prediction vs actual plots
-- Residual analysis
-- Confusion matrices
+### Economic Indicators
+- `economic_indicators.png` - S&P 500, Dow Jones, NASDAQ, and VIX performance
 
 ## Real-time Prediction Capabilities
 
@@ -227,12 +232,19 @@ The system can make real-time predictions for:
 - **Risk levels** based on current market conditions
 - **Investment recommendations** using multi-factor analysis
 
-## Data Sources
+## Data Sources & Files
 
-- **Stock Data**: Yahoo Finance API (yfinance)
-- **Market Indices**: S&P 500, Dow Jones, NASDAQ, VIX
-- **Fundamental Data**: Company financials from Yahoo Finance
-- **Technical Indicators**: Calculated from price/volume data
+### Generated Data Files
+- `data/raw/financial_dataset.csv` - 4,970 data points from 10 companies (3.8MB)
+- Contains real-time data from Yahoo Finance API including:
+  - **Stock Data**: AAPL, MSFT, GOOGL, AMZN, TSLA, NVDA, JPM, JNJ, V, PG
+  - **Market Indices**: S&P 500, Dow Jones, NASDAQ, VIX
+  - **Technical Indicators**: 20+ calculated features (RSI, MACD, Bollinger Bands, etc.)
+  - **Fundamental Data**: Company financials and ratios
+
+### Trained Models
+- `models/best_price_prediction_model.pkl` - Lasso regression (R² = 99.26%)
+- `models/best_direction_prediction_model.pkl` - SVM classifier (56.5% accuracy)
 
 ## Technical Skills Demonstrated
 
@@ -284,10 +296,13 @@ The system can make real-time predictions for:
 
 ## Key Performance Metrics
 
-- **Data Processing**: 10+ major companies, 2+ years of data
-- **Model Accuracy**: 65-85% for direction prediction, R² > 0.8 for price prediction
-- **Analysis Depth**: 20+ financial indicators, 5+ economic metrics
-- **Visualization**: 10+ professional charts and dashboards
+- **Data Processing**: 10 major companies, 4,970 data points, 51 features
+- **Model Accuracy**:
+  - Price Prediction: 99.26% R² (Lasso Regression)
+  - Direction Prediction: 56.5% accuracy (SVM)
+- **Analysis Depth**: 20+ financial indicators, 5 economic sectors
+- **Visualization**: 10 professional charts and dashboards (saved as PNG files)
+- **File Output**: 3.8MB dataset, 2 trained models, 10 visualization images
 
 ## Why This Project?
 
